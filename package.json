@@ -1,0 +1,18 @@
+{
+  "name": "kratos-bundler",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "elysia": "^0.7.15",
+    "viem": "^1.14.0"
+  },
+  "scripts": {
+    "test": "bun run index.ts"
+  }
+}
