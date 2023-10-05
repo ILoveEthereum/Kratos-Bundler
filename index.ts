@@ -1,14 +1,31 @@
-import { Elysia } from 'elysia'
+import { Elysia } from 'elysia';
+import { z } from 'zod';
 
-const app = new Elysia()
+const UserOperationSchema = z.object({
+    sender: z.string().regex(/^0x[a-fA-F0-9]{40}$/),  // Assuming an address is a string. Adjust if necessary.
+    nonce: z.number(),
+    initCode: z.string(),  // Assuming bytes are represented as strings. Adjust if necessary.
+    callData: z.string(),  // Same assumption as above.
+    callGasLimit: z.number(),
+    verificationGasLimit: z.number(),
+    preVerificationGas: z.number(),
+    maxFeePerGas: z.number(),
+    maxPriorityFeePerGas: z.number(),
+    paymasterAndData: z.string(),  // Same assumption as above.
+    signature: z.string()  // Same assumption as above.
+  });
 
-app.post('/vaidateUserOp', ({ body, set }) => {
-    if 
-    const signed = (body)
-    
-    if(signed)
-        return 'Welcome back'
+const app = new Elysia();
+app.listen(8080);
 
-    set.status = 403
-    return 'Invalid username or password'
+
+app.post('/sendUserOperation', ({ body, set }) => {
+    const validateUserOperation = UserOperationSchema.safeParse(body)
+    if(!validateUserOperation.success){
+        set.status= 400
+        return console.log(validateUserOperation.error)
+    }
+    else{
+        const userOperation = validateUserOperation.data
+    }
 })

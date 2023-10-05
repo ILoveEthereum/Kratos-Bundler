@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "elysia": "^0.7.15",
-    "viem": "^1.14.0"
+    "viem": "^1.14.0",
+    "zod": "^3.22.4"
   },
   "scripts": {
     "test": "bun run index.ts"
