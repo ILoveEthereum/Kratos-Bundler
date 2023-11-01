@@ -15,8 +15,11 @@ const UserOperationSchema = z.object({
     signature: z.string()  // Same assumption as above.
   });
 
-const app = new Elysia();
-app.listen(8080);
+const app = new Elysia()
+
+app.group('/kratos', app => app
+    .post('/sendUserOperation', signIn)
+)
 
 
 app.post('/sendUserOperation', ({ body, set }) => {
@@ -28,4 +31,4 @@ app.post('/sendUserOperation', ({ body, set }) => {
     else{
         const userOperation = validateUserOperation.data
     }
-})
+}).listen(8080)
